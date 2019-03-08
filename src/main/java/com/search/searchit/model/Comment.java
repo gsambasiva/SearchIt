@@ -30,7 +30,7 @@ public class Comment extends BaseEntity{
 	private Long userId;
 	
 	@Column(name="question_id")
-	private String questionId;
+	private Long questionId;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="type")

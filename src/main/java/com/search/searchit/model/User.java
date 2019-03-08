@@ -32,7 +32,7 @@ public class User extends BaseEntity{
 	@Column(name="email",unique=true)
 	private String email;
 	@Column(name="password")
-	private String password;
+	public String password;
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name = "user_id")
 	private List<Question> questions;
