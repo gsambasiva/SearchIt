@@ -1,5 +1,6 @@
 package com.search.searchit.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,5 +35,5 @@ public class Question extends BaseEntity{
 	
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name = "question_id")
-	private List<Comment> comments;
+	private List<Comment> comments = new ArrayList<Comment>();
 }

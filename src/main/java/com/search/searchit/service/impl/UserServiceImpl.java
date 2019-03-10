@@ -12,14 +12,44 @@ import com.search.searchit.util.Response;
 
 @Service
 public class UserServiceImpl implements IUserService{
-	
+
 	@Autowired IUserDao userDao;
-	
+
 	@Override
-	public ResponseEntity<Response> registration(User user) {
+	public ResponseEntity<Response> create(User user) {
 		User createdUser =  userDao.save(user);
 		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "user created sucessfully", createdUser), HttpStatus.OK);
 	}
+
+	@Override
+	public ResponseEntity<Response> update(User user) {
+		User updatedUser =  userDao.save(user);
+		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "user updated sucessfully", updatedUser), HttpStatus.OK);
+	}
 	
+	@Override
+	public ResponseEntity<Response> getUser(Long userId) {
+		User featchedUser = userDao.getOne(userId); 
+		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "User fetched sucessfully", featchedUser), HttpStatus.OK);
+	}
+	
+	@Override
+	public ResponseEntity<Response> delete(Long userId) {
+		userDao.deleteById(userId);
+		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "user deleted sucessfully", null), HttpStatus.OK);
+		
+	}
+	
+	@Override
+	public ResponseEntity<Response> login(String email, String password) {
+		User user = userDao.findUserByEmail(email);
+		boolean isValidUser = user.getPassword().equals(password);
+		if(isValidUser) {
+			return new ResponseEntity<Response>(new Response(Boolean.TRUE, "User validated Sucessfully", user), HttpStatus.OK);
+		}
+		return new ResponseEntity<Response>(new Response(Boolean.FALSE, "Invalid User", null), HttpStatus.NOT_ACCEPTABLE);
+	}
+
+
 
 }

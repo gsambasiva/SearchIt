@@ -1,5 +1,6 @@
 package com.search.searchit.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,6 @@ public class User extends BaseEntity{
 	public String password;
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name = "user_id")
-	private List<Question> questions;
+	private List<Question> questions = new ArrayList<Question>();
 
 }

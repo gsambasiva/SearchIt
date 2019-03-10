@@ -3,10 +3,9 @@ package com.search.searchit.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.search.searchit.model.User;
+import com.search.searchit.model.Comment;
 
 @Repository
-public interface IUserDao extends JpaRepository<User, Long>{
-	public User findUserByEmail(String email);
+public interface ICommentDao extends JpaRepository<Comment, Long> {
 
 }
