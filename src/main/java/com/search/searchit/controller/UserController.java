@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userService;
 
-	@PostMapping("user/registration")
+	@PostMapping("/user/registration")
 	public ResponseEntity<Response> createUser(@RequestBody User user) {
 		/*try {
 		user.setPassword(EncryptAndDecryptHelper.encrypt(user.getPassword(), "search_it"));
@@ -29,22 +29,22 @@ public class UserController {
 		return userService.create(user);
 	}
 
-	@PostMapping("user/update")
+	@PostMapping("/user/update")
 	public ResponseEntity<Response> userUpdate(@RequestBody User user)  {
 		return userService.update(user);
 	}
 
-	@PostMapping("user/getUser")
-	public ResponseEntity<Response> getUser(Long userId ) {
+	@PostMapping("/user/getUser")
+	public ResponseEntity<Response> getUser(@RequestParam Long userId ) {
 		return userService.getUser(userId);
 	}
 
-	@PostMapping("user/delete")
+	@PostMapping("/user/delete")
 	public ResponseEntity<Response> userDelete(@RequestParam Long userId ) {
 		return userService.delete(userId);
 	}
 
-	@PostMapping("user/login")
+	@PostMapping("/user/login")
 	public ResponseEntity<Response> userLogIn(@RequestParam String email, @RequestParam String password ) {
 		return userService.login(email, password);
 	}

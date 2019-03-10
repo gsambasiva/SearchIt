@@ -1,5 +1,7 @@
 package com.search.searchit.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +29,11 @@ public class QuestionServiceImpl implements IQuestionService {
 	
 	@Override
 	public ResponseEntity<Response> getQuestion(Long id) {
-		Question retrivedQuestion = questionDao.getOne(id);
-		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "Question  retrived sucessfully", retrivedQuestion), HttpStatus.OK);	
+		Optional<Question> retrivedQuestion = questionDao.findById(id);
+		if (retrivedQuestion.isPresent()) {
+			return new ResponseEntity<Response>(new Response(Boolean.TRUE, "Question  retrived sucessfully", retrivedQuestion), HttpStatus.OK);	
+		}
+		return new ResponseEntity<Response>(new Response(Boolean.FALSE, "No Question is presented with Id", retrivedQuestion), HttpStatus.NOT_FOUND);
 	}
 	
 	@Override

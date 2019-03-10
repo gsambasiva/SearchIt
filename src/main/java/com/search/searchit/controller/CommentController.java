@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.search.searchit.model.Comment;
@@ -21,19 +22,17 @@ public class CommentController {
 	}
 
 	@PostMapping("/comment/update")
-	public ResponseEntity<Response> updateComment(Comment comment) {
+	public ResponseEntity<Response> updateComment(@RequestBody Comment comment) {
 		return commentService.updateComment(comment);
 	}
 
 	@PostMapping("/comment/getComment")
-	public ResponseEntity<Response> getComment(Long commentId) {
+	public ResponseEntity<Response> getComment(@RequestParam Long commentId) {
 		return commentService.getComment(commentId);
 	}
 
 	@PostMapping("/comment/delete")
-	public ResponseEntity<Response> deleteComment(Long commentId) {
+	public ResponseEntity<Response> deleteComment(@RequestParam Long commentId) {
 		return commentService.deleteComment(commentId);
 	}
-	
-
 }

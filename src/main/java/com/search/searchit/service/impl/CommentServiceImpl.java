@@ -1,5 +1,7 @@
 package com.search.searchit.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +30,11 @@ public class CommentServiceImpl implements ICommentService{
 
 	@Override
 	public ResponseEntity<Response> getComment(Long commentId) {
-		Comment retrivedComment = commentDao.getOne(commentId);
-		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "Comment retrived sucessfully", retrivedComment), HttpStatus.OK);
+		Optional<Comment> retrivedComment = commentDao.findById(commentId);
+		if (retrivedComment.isPresent()) {
+			return new ResponseEntity<Response>(new Response(Boolean.TRUE, "Comment retrived sucessfully", retrivedComment), HttpStatus.OK);	
+		}
+		return new ResponseEntity<Response>(new Response(Boolean.FALSE, "No Comment is presented with Id", retrivedComment), HttpStatus.NOT_FOUND);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.search.searchit.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +31,11 @@ public class UserServiceImpl implements IUserService{
 	
 	@Override
 	public ResponseEntity<Response> getUser(Long userId) {
-		User featchedUser = userDao.getOne(userId); 
-		return new ResponseEntity<Response>(new Response(Boolean.TRUE, "User fetched sucessfully", featchedUser), HttpStatus.OK);
+		Optional<User> featchedUser = userDao.findById(userId); 
+		if (featchedUser.isPresent()) {
+			return new ResponseEntity<Response>(new Response(Boolean.TRUE, "User fetched sucessfully", featchedUser), HttpStatus.OK);
+		}
+		return new ResponseEntity<Response>(new Response(Boolean.FALSE, "No user is presented with Id", featchedUser), HttpStatus.NOT_FOUND);
 	}
 	
 	@Override
