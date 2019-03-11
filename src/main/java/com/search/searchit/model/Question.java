@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.search.searchit.validation.IValidationelper;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +31,12 @@ public class Question extends BaseEntity{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
 
-	@Column(name="question" )
+	@Column(name="question")
+	@Size(min=10, message="Name should have atleast 10 characters")
 	private String question;
 
 	@Column(name="user_id")
+	@NotNull
 	private Long userId;
 	
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
