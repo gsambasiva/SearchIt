@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.search.searchit.model.User;
 
 @Repository
-public interface IUserDao extends JpaRepository<User, Long>{
-	public User findUserByEmail(String email);
+public interface IUserDao extends JpaRepository<User, Long>, ICustomUser{
 
 }

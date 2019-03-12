@@ -12,6 +12,8 @@ import com.search.searchit.model.User;
 import com.search.searchit.service.IUserService;
 import com.search.searchit.util.Response;
 
+import lombok.Data;
+
 @Service
 public class UserServiceImpl implements IUserService{
 
