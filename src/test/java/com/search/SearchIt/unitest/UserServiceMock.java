@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,8 @@ import com.search.searchit.util.Response;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class UserServiceMock {
-	
-	@Mock
-	User userMock;
-	@InjectMocks
+
 	IUserService userService;
-	@InjectMocks
-	UserServiceImpl serviceImpl;
 	
 	@BeforeClass
 	public static void beforeClass() {
@@ -40,17 +36,62 @@ public class UserServiceMock {
 	}
 	
 	@Test
-	public void createUser() {
+	public void test_createUser() {
 		userService = mock(IUserService.class);
 		User user  = new User();
 		user.setFirstName("sairam");
 		user.setLastName("Dammalapati");
 		user.setEmail("sairamd@gmail.com");
 		user.setPassword("@#qwe");
-		when(userService.create(user)).thenReturn(new ResponseEntity(new Response(Boolean.TRUE,"user Created sucessfully",user), HttpStatus.OK));
-		serviceImpl = new UserServiceImpl();
-		ResponseEntity<Response> rResponse = serviceImpl.create(user);
-		assertEquals(rResponse, rResponse);
+		Mockito.when(userService.create(user)).thenReturn(new ResponseEntity<Response>(new Response(Boolean.TRUE, "user created sucessfully", user), HttpStatus.OK));
+		ResponseEntity<Response> rResponse = userService.create(user);
+		assertEquals(HttpStatus.OK, rResponse.getStatusCode());
 	}
+	@Test
+	public void test_getUser() {
+		userService = mock(IUserService.class);
+		User user  = new User();
+		user.setFirstName("sairam");
+		user.setLastName("Dammalapati");
+		user.setEmail("sairamd@gmail.com");
+		user.setPassword("@#qwe");
+		Mockito.when(userService.getUser(12l)).thenReturn(new ResponseEntity<Response>(new Response(Boolean.TRUE, "user created sucessfully", user), HttpStatus.OK));
+		ResponseEntity<Response> rResponse = userService.getUser(12l);
+		assertEquals(HttpStatus.OK, rResponse.getStatusCode());
+	}
+	
+	@Test
+	public void test_deleteUser() {
+		userService = mock(IUserService.class);
+		Mockito.when(userService.delete(12l)).thenReturn(new ResponseEntity<Response>(new Response(Boolean.TRUE, "user deleted sucessfully", null), HttpStatus.OK));
+		ResponseEntity<Response> rResponse = userService.delete(12l);
+		assertEquals(HttpStatus.OK, rResponse.getStatusCode());
+	}	
+	
+	@Test
+	public void test_loginUser() {
+		userService = mock(IUserService.class);
+		User user  = new User();
+		user.setFirstName("sairam");
+		user.setLastName("Dammalapati");
+		user.setEmail("sairamd@gmail.com");
+		user.setPassword("@#qwe");
+		Mockito.when(userService.login("sairamdammalapati@gmail.com", "changeIt")).thenReturn(new ResponseEntity<Response>(new Response(Boolean.TRUE, "User validated Sucessfully", user), HttpStatus.OK));
+		ResponseEntity<Response> rResponse = userService.login("sairamdammalapati@gmail.com", "changeIt");
+		assertEquals(HttpStatus.OK, rResponse.getStatusCode());
+	}
+	
+	@Test
+	public void test_updateUser() {
+		userService = mock(IUserService.class);
+		User user  = new User();
+		user.setFirstName("sairam");
+		user.setLastName("Dammalapati");
+		user.setEmail("sairamd@gmail.com");
+		user.setPassword("@#qwe");
+		Mockito.when(userService.update(user)).thenReturn(new ResponseEntity<Response>(new Response(Boolean.TRUE, "user updated sucessfully", user), HttpStatus.OK));
+		ResponseEntity<Response> rResponse = userService.update(user);
+		assertEquals(HttpStatus.OK, rResponse.getStatusCode());
+	}	
 
 }
