@@ -5,7 +5,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.search.searchit.model.User;
 import com.search.searchit.service.impl.UserServiceImpl;
-import com.search.searchit.util.EncryptAndDecryptHelper;
 import com.search.searchit.util.Response;
 import com.search.searchit.validation.ValidationHelper;
 
@@ -26,6 +24,7 @@ public class UserController {
 	UserServiceImpl userService;
 	@Autowired
 	ValidationHelper validation;
+	
 	@PostMapping("/user/registration")
 	public ResponseEntity<Response> createUser(@RequestBody User user) {
 		/*try {
@@ -59,10 +58,10 @@ public class UserController {
 		return userService.delete(userId);
 	}
 
-	@PostMapping("/user/login")
+	/*@PostMapping("/user/login")
 	public ResponseEntity<Response> userLogIn(@Valid @Email @RequestParam String email, @Valid @NotNull @RequestParam String password ) {
 		return userService.login(email, password);
-	}
+	}*/
 
 
 

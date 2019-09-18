@@ -47,7 +47,7 @@ public class UserServiceImpl implements IUserService{
 		
 	}
 	
-	@Override
+	/*@Override
 	public ResponseEntity<Response> login(String email, String password) {
 		User user = userDao.findUserByEmail(email);
 		boolean isValidUser = user.getPassword().equals(password);
@@ -56,7 +56,7 @@ public class UserServiceImpl implements IUserService{
 		}
 		return new ResponseEntity<Response>(new Response(Boolean.FALSE, "Invalid User", null), HttpStatus.NOT_ACCEPTABLE);
 	}
-
+*/
 
 
 }

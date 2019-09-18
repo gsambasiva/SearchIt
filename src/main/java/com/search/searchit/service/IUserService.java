@@ -10,6 +10,6 @@ public interface IUserService {
 	public ResponseEntity<Response> update(User user);
 	public ResponseEntity<Response> getUser(Long userId);
 	public ResponseEntity<Response> delete(Long userId);
-	public ResponseEntity<Response> login(String email , String password);
+	/*public ResponseEntity<Response> login(String email , String password);*/
 }
 	
