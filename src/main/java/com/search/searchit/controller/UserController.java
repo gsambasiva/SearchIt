@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,7 @@ import com.search.searchit.util.Response;
 import com.search.searchit.validation.ValidationHelper;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
 	@Autowired
@@ -48,7 +51,7 @@ public class UserController {
 		return userService.update(user);
 	}
 
-	@PostMapping("/user/getUser")
+	@GetMapping("/user/getUser")
 	public ResponseEntity<Response> getUser(@Valid @NotNull @RequestParam Long userId ) {
 		return userService.getUser(userId);
 	}
